@@ -21,7 +21,7 @@ Backend: Node.js / Express (optional for API services)
 Wallet Integration: MetaMask, WalletConnect 🚀 
 
 Getting Started:
-Clone the repository: bash Copy Edit git clone https://github.com/bishal7448/ArogyaChain_V1 
+Clone the repository: bash Copy Edit git clone https://github.com/bishal7448/ArogyaChain
 cd medical-dapp 
 Install dependencies: bash Copy Edit npm install 
 Deploy smart contracts: bash Copy Edit npx hardhat deploy 
