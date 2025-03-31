@@ -81,7 +81,7 @@ NEXT_PUBLIC_PINATA_SECRET_KEY=YOUR_PINATA_SECRET_KEY
 - [Final Source Code](#)
 - [Final Code Setup Video](#)
 
-  # Hardhat Setup
+# Hardhat Setup
 
 ## Overview
 
