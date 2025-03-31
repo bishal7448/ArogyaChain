@@ -2,6 +2,8 @@ import React, { useState, useContext, createContext, useEffect } from "react";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import toast from "react-hot-toast";
+import { MetaMaskSDK } from '@metamask/sdk';
+
 //INTERNAL IMPORT
 import {
   HANDLE_NETWORK_SWITCH,
@@ -36,41 +38,49 @@ export const StateContextProvider = ({ children }) => {
   const notifySuccess = (msg) => toast.success(msg, { duration: 2000 });
   const notifyError = (msg) => toast.error(msg, { duration: 2000 });
 
-  //CHECK WALLET CONNECT
-  const CHECKI_IF_CONNECTED_LOAD = async () => {
-    try {
-      if (!window.ethereum) return console.log("Install MetaMask");
-      HANDLE_NETWORK_SWITCH();
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts",
-      });
+  // const MMSDK = new MetaMaskSDK();
+  const ethereum = MMSDK.getProvider();
 
+  const MMSDK = new MetaMaskSDK({
+    dappMetadata: { name: "ArogyaChain" },
+    preferDesktop: false, // Set true if prioritizing desktop experience
+    checkInstallationImmediately: true,
+  });
+
+  // CHECK WALLET CONNECT
+  const CHECK_IF_CONNECTED_LOAD = async () => {
+    try {
+      if (!ethereum) return console.log("Install MetaMask");
+  
+      // Request accounts
+      const accounts = await ethereum.request({ method: "eth_accounts" });
+  
       if (accounts.length) {
         setAddress(accounts[0]);
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const provider = new ethers.providers.Web3Provider(ethereum);
         const getBalance = await provider.getBalance(accounts[0]);
         const bal = ethers.utils.formatEther(getBalance);
-
+  
         setAccountBalance(bal);
         return accounts[0];
       } else {
         return "No account";
       }
     } catch (error) {
+      console.error("Connection error:", error);
       return "not connected";
     }
   };
 
-  //CONNECT WALLET
+  // CONNECT WALLET
   const CONNECT_WALLET = async () => {
     try {
-      if (!window.ethereum) return console.log("Install MateMask");
+      if (!ethereum) return console.log("Install MetaMask");
       await HANDLE_NETWORK_SWITCH();
-      const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
-      });
+      
+      const accounts = await ethereum.request({ method: "eth_requestAccounts" });
       const firstAccount = accounts[0];
-
+      
       setAddress(firstAccount);
       return firstAccount;
     } catch (error) {
@@ -81,6 +91,53 @@ export const StateContextProvider = ({ children }) => {
   useEffect(() => {
     CHECKI_IF_CONNECTED_LOAD();
   }, []);
+
+  // //CHECK WALLET CONNECT
+  // const CHECKI_IF_CONNECTED_LOAD = async () => {
+  //   try {
+  //     if (!window.ethereum) return console.log("Install MetaMask");
+  //     HANDLE_NETWORK_SWITCH();
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_accounts",
+  //     });
+
+  //     if (accounts.length) {
+  //       setAddress(accounts[0]);
+  //       const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //       const getBalance = await provider.getBalance(accounts[0]);
+  //       const bal = ethers.utils.formatEther(getBalance);
+
+  //       setAccountBalance(bal);
+  //       return accounts[0];
+  //     } else {
+  //       return "No account";
+  //     }
+  //   } catch (error) {
+  //     return "not connected";
+  //   }
+  // };
+
+
+  // //CONNECT WALLET
+  // const CONNECT_WALLET = async () => {
+  //   try {
+  //     if (!window.ethereum) return console.log("Install MateMask");
+  //     await HANDLE_NETWORK_SWITCH();
+  //     const accounts = await window.ethereum.request({
+  //       method: "eth_requestAccounts",
+  //     });
+  //     const firstAccount = accounts[0];
+
+  //     setAddress(firstAccount);
+  //     return firstAccount;
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   CHECKI_IF_CONNECTED_LOAD();
+  // }, []);
 
   //-------MEDICINE------------
 
