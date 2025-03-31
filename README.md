@@ -1,34 +1,85 @@
-# Medical Health Management Blockchain Dapp (ArogyaChain)
+# Medical Health Management Blockchain Dapp
 
-Build & Deploy a Medical Health Management Blockchain Dapp | Solidity, Hardhat, Next.js, Context AP and web3 providers
+## Project Overview
 
-In this comprehensive tutorial, we will guide you through the process of building and deploying a Medical Health Management Dapp on the blockchain. This step-by-step video covers everything from setting up the development environment to deploying the smart contracts and building a user-friendly frontend.
+This repository contains the source code for a Medical Health Management Dapp built using Solidity, Hardhat, Next.js, Context API, and Web3 providers. Follow the instructions below to set up and run the project successfully.
 
-✨ Features:
-✅ Decentralized Medical Records – Securely store and access medical history on the blockchain. 
-✅ Tokenized Rewards – Patients earn tokens for completing medical tests or checkups. 
-✅ Doctor-Patient Interaction – Connect with verified healthcare professionals securely. 
-✅ Immutable & Transparent – Prevents data tampering and unauthorized access. 
-✅ IPFS-based Storage – Efficiently stores medical reports and prescriptions. 
-✅ Secure User Authentication – Non-custodial wallets ensure user privacy.
+## Setup Instructions
 
-🛠 Tech Stack Blockchain: 
-Ethereum / Polygon 
-Smart Contracts: Solidity, Hardhat 
-Storage: IPFS for secure medical data storage 
-Frontend: React.js / Next.js with Web3 integration 
-Backend: Node.js / Express (optional for API services) 
-Wallet Integration: MetaMask, WalletConnect 🚀 
+### Prerequisites
+Ensure you have the necessary software installed before proceeding:
 
-Getting Started:
-Clone the repository: bash Copy Edit git clone https://github.com/bishal7448/ArogyaChain
-cd medical-dapp 
-Install dependencies: bash Copy Edit npm install 
-Deploy smart contracts: bash Copy Edit npx hardhat deploy 
-Start the application: bash Copy Edit npm run dev 
+#### Install VS Code Editor
+[Download VS Code](https://code.visualstudio.com/download)
 
-🔐 Security & Privacy Fully decentralized architecture ensures no central entity controls patient data. Private keys and transactions are secured via blockchain encryption. No third-party access to medical records without user consent. 
+#### Node.js & NPM Version
+- **Node.js:** v18.12.1 or v18.17.1 (MUST)
+- **NPM:** 8.19.2
+- [Download Node.js](https://nodejs.org/en/download)
+- [Setup Video](https://youtu.be/)
 
-📜 License This project is open-source under the MIT License.
+#### Pinata (IPFS Storage)
+- [Get Pinata API Key](https://pinata.cloud)
+- [Get Pinata Secret Key](https://pinata.cloud)
 
-💡 Join us in revolutionizing the healthcare industry with blockchain technology!
+### Clone Starter File
+Clone the project starter files from the repository:
+```
+git clone https://github.com/YOUR-REPO-URL
+cd medical-health-dapp
+```
+
+## Running the Project
+
+If you have downloaded the final source code, follow these steps:
+
+### Setup & Demo
+Watch the setup and demo video for a detailed walkthrough:
+```
+WATCH: Setup & Demo Of Project
+```
+
+### Install Dependencies
+Run the following command in the project directory:
+```
+npm install
+```
+
+### Running the Dapp Locally
+```
+npm run dev
+```
+
+### Deploying the Smart Contract
+We are using RemixID for deploying the contract and generating the ABI, but you can also use Hardhat.
+- [Open RemixID](https://remix-project.org)
+
+### Free Test Faucets
+Alchemy provides free test faucets to fund your wallet for deploying the contract.
+- [Get Free Test Faucets](https://www.theblockchaincoders.com/resource)
+
+### RPC URL Provider
+We are using **ANKR** as the RPC provider.
+- [ANKR RPC URL](https://www.ankr.com/rpc/)
+
+### OpenAI API Key (Optional)
+If using OpenAI features, add your API key:
+```
+NEXT_PUBLIC_OPEN_AI_KEY=YOUR_OPEN_AI_KEY
+```
+- [OpenAI API Reference](https://platform.openai.com/docs/api-reference/introduction)
+
+### Pinata IPFS Keys
+If using Pinata for IPFS storage, add your API keys:
+```
+NEXT_PUBLIC_PINATA_API_KEY=YOUR_PINATA_API_KEY
+NEXT_PUBLIC_PINATA_SECRET_KEY=YOUR_PINATA_SECRET_KEY
+```
+- [Pinata Cloud](https://www.pinata.cloud/)
+
+## Additional Resources
+- [Final Source Code](#)
+- [Final Code Setup Video](#)
+
+Follow the above instructions carefully to successfully build and deploy your Medical Health Management Blockchain Dapp.
+
