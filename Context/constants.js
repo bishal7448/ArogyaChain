@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import Web3Modal from "web3modal";
 import OpenAI from "openai";
 import axios from "axios";
+import MetaMaskSDK from "@metamask/sdk";
 
 import Healthcare from "./Healthcare.json";
 
@@ -45,6 +46,17 @@ const networks = {
     },
     rpcUrls: ["https://sepolia.infura.io/v3/"],
     blockExplorerUrls: ["https://sepolia.etherscan.io"],
+  },
+  linea_sepolia: {
+    chainId: `0x${Number(59141).toString(16)}`,
+    chainName: "Linea Sepolia",
+    nativeCurrency: {
+      name: "ETH",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    rpcUrls: ["https://linea-sepolia.infura.io/v3/"],
+    blockExplorerUrls: ["https://sepolia.lineascan.build"],
   },
   polygon_amoy: {
     chainId: `0x${Number(80002).toString(16)}`,
@@ -114,16 +126,15 @@ const networks = {
   },
 };
 
+const MMSDK = new MetaMaskSDK();
+const ethereum = MMSDK.getProvider();
+
 const changeNetwork = async ({ networkName }) => {
   try {
-    if (!window.ethereum) throw new Error("No crypto wallet found");
-    const network = await window.ethereum.request({
+    if (!ethereum) throw new Error("No crypto wallet found");
+    const network = await ethereum.request({
       method: "wallet_addEthereumChain",
-      params: [
-        {
-          ...networks[networkName],
-        },
-      ],
+      params: [networks[networkName]],
     });
     return network;
   } catch (err) {
@@ -132,10 +143,33 @@ const changeNetwork = async ({ networkName }) => {
 };
 
 export const HANDLE_NETWORK_SWITCH = async () => {
-  const networkName = NETWORK;
+  const networkName = NETWORK; // Change this dynamically if needed
   const network = await changeNetwork({ networkName });
   return network;
 };
+
+// const changeNetwork = async ({ networkName }) => {
+//   try {
+//     if (!window.ethereum) throw new Error("No crypto wallet found");
+//     const network = await window.ethereum.request({
+//       method: "wallet_addEthereumChain",
+//       params: [
+//         {
+//           ...networks[networkName],
+//         },
+//       ],
+//     });
+//     return network;
+//   } catch (err) {
+//     console.log(err.message);
+//   }
+// };
+
+// export const HANDLE_NETWORK_SWITCH = async () => {
+//   const networkName = NETWORK;
+//   const network = await changeNetwork({ networkName });
+//   return network;
+// };
 
 export const SHORTEN_ADDRESS = (address) =>
   `${address?.slice(0, 8)}...${address?.slice(address.length - 4)}`;
